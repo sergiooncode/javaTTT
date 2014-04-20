@@ -95,8 +95,6 @@ public class UnbeatableAI{
 		int currentTreeDepth = 0;
 		String currentPlayer = token;
 		negamaxResult = negamaxAlgorithmMethod(board, currentPlayer, maxTreeDepth, currentTreeDepth);
-		for(int m=0; m < negamaxResult.length; m++) System.out.print(negamaxResult[m] + "   ");
-		System.out.println();
 		return negamaxResult[1] + 1;
 	}
 }
