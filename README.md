@@ -1,6 +1,6 @@
 # javaTTT
 
-Tic Tac Toe game implementation in Java.
+Implementation of Tic Tac Toe game in Java.
 
 To play:
 
