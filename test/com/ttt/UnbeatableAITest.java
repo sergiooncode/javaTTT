@@ -2,21 +2,15 @@ package com.ttt;
 
 import static org.junit.Assert.*;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 public class UnbeatableAITest {
-	private static final int INFINITY = 1000000;
-	CommandLine commandLine;
+	static final int INFINITY = 1000000;
 	Board board;
-	final String newLine = System.getProperty("line.separator");
-	Scanner scanner;
 	UnbeatableAI unbeatableAI;
 	String currentPlayer;
 	int rows = 3;
@@ -27,9 +21,6 @@ public class UnbeatableAITest {
 		board = new Board(rows, columns);
 		unbeatableAI = new UnbeatableAI(board, "X");
 		currentPlayer = "X";
-		ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
-		PrintStream out = new PrintStream(outputBuffer);
-		commandLine = new CommandLine(scanner, out);
 	}
 
 	@After
@@ -80,15 +71,61 @@ public class UnbeatableAITest {
 		board.setGivenSquare(9, "X");
 		assertEquals(INFINITY, unbeatableAI.staticEvaluationFunction(currentPlayer, board));
 	}
-
-//	@Test
-//	public void testNegamaxAlgorithmMethod() {
-//		fail("Not yet implemented");
-//	}
-//
+	
 	@Test
-	public void testGenerateMove() {
-		fail("Not yet implemented");
+	public void testAlternatePlayer() {
+		assertEquals("O", unbeatableAI.alternatePlayer(currentPlayer));
 	}
 
+	@Test
+	public void testWhenHasWinningMove() {
+		board.setGivenSquare(1, "X");
+		board.setGivenSquare(2, "X");
+		int[] negamaxResult = new int[2];
+		int maxTreeDepth = board.getBoardSize();
+		int currentTreeDepth = 0;
+		negamaxResult = unbeatableAI.negamaxAlgorithmMethod(board, currentPlayer, maxTreeDepth, currentTreeDepth);
+		assertEquals(INFINITY, negamaxResult[0]);
+		assertEquals(2, negamaxResult[1]);
+	}
+	
+	@Test
+	public void testWhenMovesForATie() {
+		board.setGivenSquare(1, "X");
+		board.setGivenSquare(2, "X");
+		board.setGivenSquare(3, "O");
+		board.setGivenSquare(4, "O");
+		board.setGivenSquare(5, "O");
+		board.setGivenSquare(6, "X");
+		board.setGivenSquare(7, "X");
+		board.setGivenSquare(8, "O");
+		board.setGivenSquare(9, "-");
+		int[] negamaxResult = new int[2];
+		int maxTreeDepth = board.getBoardSize();
+		int currentTreeDepth = 0;
+		negamaxResult = unbeatableAI.negamaxAlgorithmMethod(board, currentPlayer, maxTreeDepth, currentTreeDepth);
+		assertEquals(0, negamaxResult[0]);
+		assertEquals(8, negamaxResult[1]);
+	}
+
+	@Test
+	public void testGeneratesValidMoveWhenBoardEmpty() {
+		int[] negamaxResult = new int[2];
+		int maxTreeDepth = board.getBoardSize();
+		int currentTreeDepth = 0;
+		negamaxResult = unbeatableAI.negamaxAlgorithmMethod(board, currentPlayer, maxTreeDepth, currentTreeDepth);
+		assertEquals(0, negamaxResult[0]);
+		assertEquals(0, negamaxResult[1]);
+	}
+	
+	@Test
+	public void testGeneratesValidMoveAfterHumanPlayer() {
+		board.setGivenSquare(1, "O");
+		int[] negamaxResult = new int[2];
+		int maxTreeDepth = board.getBoardSize();
+		int currentTreeDepth = 0;
+		negamaxResult = unbeatableAI.negamaxAlgorithmMethod(board, currentPlayer, maxTreeDepth, currentTreeDepth);
+		assertEquals(0, negamaxResult[0]);
+		assertEquals(4, negamaxResult[1]);
+	}
 }

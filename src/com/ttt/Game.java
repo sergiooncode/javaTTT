@@ -134,7 +134,7 @@ public class Game {
 				announceWinner(player2);
 			}
 		} else {
-			commandLine.writeMessage("It was a tie. Well played.");
+			commandLine.announceItWasATie();
 		}
 	}
 	

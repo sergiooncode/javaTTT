@@ -98,8 +98,8 @@ public class CommandLine{
 		output.println(" ");
 	}
 	
-	public void writeMessage(String message){
-		output.println(message);
+	public void announceItWasATie(){
+		output.println("It was a tie. Well played.");
 	}
 	
 	public boolean isTypeEnteredInvalid(String input) {

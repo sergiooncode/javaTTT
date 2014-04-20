@@ -199,7 +199,7 @@ public class CommandLineTest {
 	}
 
 	@Test
-	public void testWriteMessage() {
+	public void testAnnounceItWasATie() {
 		scanner = new Scanner("");
 		scanner.useDelimiter(" ");
 		
@@ -207,8 +207,8 @@ public class CommandLineTest {
 		PrintStream out = new PrintStream(outputBuffer);
 		
 		commandLine = new CommandLine(scanner, out);
-		commandLine.writeMessage("Fire in the hole");
+		commandLine.announceItWasATie();
 		final String output = outputBuffer.toString();
-		assertTrue(output.startsWith("Fire in the hole"));
+		assertTrue(output.startsWith("It was a tie. Well played."));
 	}
 }
