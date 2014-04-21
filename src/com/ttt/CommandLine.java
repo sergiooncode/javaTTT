@@ -15,22 +15,19 @@ public class CommandLine{
 		this.input = scanner;
 	}
 	
-	public void welcomeMessage() {
-		output.println();
+	public void printWelcomeMessage() {
 		output.println();
 		output.println("               ------------------Welcome to Tic Tac Toe game------------------               ");
 		output.println();
-		output.println();
 	}
 	
-	public void announceMachinePlayerToken(int playerOrder, String token) {
-		output.println(String.format("Machine player %s plays with token %s", playerOrder, token));
-		output.println();
+	public void askForPlayerType (int playerOrder) {
+		output.println(String.format("Type h or m to choose the type of player %s who will move in %s place: (h)uman or (m)achine", playerOrder, playerOrder == 1 ? "first" : "second"));
 	}
 	
-	public String askForPlayerType(int playerOrderWhenChoosingType) throws IOException{
+	public String getPlayerType(int playerOrderWhenChoosingType) throws IOException{
 		String inputForPlayerType;
-		output.println(String.format("Type h or m to choose the type of player %s who will move in %s place: (h)uman or (m)achine", playerOrderWhenChoosingType, playerOrderWhenChoosingType == 1 ? "first" : "second"));
+		askForPlayerType(playerOrderWhenChoosingType);
 		inputForPlayerType = input.next();
 		while(isTypeEnteredInvalid(inputForPlayerType)) {
 			output.println("Please enter a valid type:");
@@ -39,8 +36,18 @@ public class CommandLine{
 		return inputForPlayerType;
 	}
 	
-	public void announceHumanPlayerToken(int playerOrder, String token) {
+	public void printMachinePlayerToken(int playerOrder, String token) {
+		output.println(String.format("Machine player %s plays with token %s", playerOrder, token));
+		output.println();
+	}
+	
+	public void printHumanPlayerToken(int playerOrder, String token) {
 		output.println(String.format("Human player %s plays with token %s", playerOrder, token));
+		output.println();
+	}
+	
+	public void printMessageBeforeShowingBoardLabeling() {
+		output.println("The moves must be entered according to the following labels:");
 		output.println();
 	}
 	
@@ -76,13 +83,13 @@ public class CommandLine{
 		output.println("Please enter a valid board position:");
 	}
 	
-	public void askMachinePlayerForMove(int playerOrder) {
+	public void printMessageMachinePlayerThinking(int playerOrder) {
 		output.println(String.format("Machine player %s is thinking its next move...", playerOrder));
 	}
 	
-	public int getBoardPositionFromHumanPlayer() {
+	public int getBoardPositionFromHumanPlayer() throws NumberFormatException, IOException{
 		String positionTyped = input.next();
-		while(isInvalidBoardPosition(positionTyped)) {
+		while(isBoardPositionInvalid(positionTyped)) {
 			askHumanPlayerForValidBoardPosition();
 			positionTyped = input.next();
 		}
@@ -93,12 +100,7 @@ public class CommandLine{
 		output.println(String.format("The %s player %s won.", winnerType, playerOrder));
 	}
 	
-	public void printMessageToShowBoardLabeling() {
-		output.println("The moves must be entered according to the following labels:");
-		output.println(" ");
-	}
-	
-	public void announceItWasATie(){
+	public void printMessageItWasATie(){
 		output.println("It was a tie. Well played.");
 	}
 	
@@ -109,7 +111,7 @@ public class CommandLine{
 		return true;
 	}
 	
-	public boolean isInvalidBoardPosition(String positionTyped) {
+	public boolean isBoardPositionInvalid(String positionTyped) {
 		List<String> validBoardPositions = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8", "9");
 		if(validBoardPositions.contains(positionTyped)) {
 			return false;

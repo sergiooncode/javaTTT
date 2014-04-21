@@ -15,42 +15,29 @@ public class Game {
 		this.commandLine = commandline;
 	}
 	
+	public void playGame() throws IOException{
+		startGame();
+		while(!gameReferee.isGameOver(board)) {
+			askPlayersForMoves();
+		}
+		endGame();
+	}
+	
+	public void startGame() throws IOException{
+		showWelcomeMessage();
+		createBoard();
+		createPlayersBasedOnChosenTypes();
+		announcePlayersTokensAtStart();
+		createGameReferee();
+		showSquaresLabelsOnBoard();
+	}
+	
 	public void showWelcomeMessage() {
-		commandLine.welcomeMessage();
+		commandLine.printWelcomeMessage();
 	}
 	
 	public void createBoard() {
 		board = new Board(rows, columns);
-	}
-	
-	public void createGameReferee() {
-		this.gameReferee = new GameReferee();
-	}
-	
-	public void announcePlayerToken(Player player) {
-		if(player.isMachine()) {
-			commandLine.announceMachinePlayerToken(player.getPlayerOrder(), player.getToken());
-		} else {
-			commandLine.announceHumanPlayerToken(player.getPlayerOrder(), player.getToken());
-		}
-	}
-	
-	public void showSquaresLabelsOnBoard() {
-		commandLine.printMessageToShowBoardLabeling();
-		commandLine.printSquares(board);
-		
-	}
-	
-	public void announcePlayersTokensAtStart() {
-		announcePlayerToken(player1);
-		announcePlayerToken(player2);
-	}
-	
-	public String[] askForTypesOfPlayers() throws IOException{
-		String[] playersTypes = new String[2];
-		playersTypes[0] = commandLine.askForPlayerType(1);
-		playersTypes[1] = commandLine.askForPlayerType(2);
-		return playersTypes;
 	}
 	
 	public void createPlayersBasedOnChosenTypes() throws IOException{
@@ -67,20 +54,41 @@ public class Game {
 		}
 	}
 	
-	public int getMoveFromHumanPlayer(Player player) throws IOException{
-		int position;
-		commandLine.askHumanPlayerForMove(player.getPlayerOrder());
-		position = commandLine.getBoardPositionFromHumanPlayer();
-		while(!board.isSquareEmpty(position)) {
-			commandLine.askHumanPlayerForMoveAgain();
-			position = commandLine.getBoardPositionFromHumanPlayer();
-		}
-		return position;
+	public String[] askForTypesOfPlayers() throws IOException{
+		String[] playersTypes = new String[2];
+		playersTypes[0] = commandLine.getPlayerType(1);
+		playersTypes[1] = commandLine.getPlayerType(2);
+		return playersTypes;
 	}
 	
-	public int getMoveFromMachinePlayer(Player player) throws IOException{
-		commandLine.askMachinePlayerForMove(player.getPlayerOrder());
-		return -1;
+	public void announcePlayersTokensAtStart() {
+		announcePlayerToken(player1);
+		announcePlayerToken(player2);
+	}
+	
+	public void announcePlayerToken(Player player) {
+		if(player.isMachine()) {
+			commandLine.printMachinePlayerToken(player.getPlayerOrder(), player.getToken());
+		} else {
+			commandLine.printHumanPlayerToken(player.getPlayerOrder(), player.getToken());
+		}
+	}
+	
+	public void createGameReferee() {
+		this.gameReferee = new GameReferee();
+	}
+	
+	public void showSquaresLabelsOnBoard() {
+		commandLine.printMessageBeforeShowingBoardLabeling();
+		commandLine.printSquares(board);
+	}
+	
+	public void askPlayersForMoves() throws IOException{
+		makePlayerMove(player1);
+		if(gameReferee.isGameOver(board)) {
+			return;
+		}
+		makePlayerMove(player2);
 	}
 	
 	public void makePlayerMove(Player player) throws IOException{
@@ -96,31 +104,20 @@ public class Game {
 		}
 	}
 	
-	public void askPlayersForMoves() throws IOException{
-		makePlayerMove(player1);
-		if(gameReferee.isGameOver(board)) {
-			return;
-		}
-		makePlayerMove(player2);
+	public int getMoveFromMachinePlayer(Player player) throws IOException{
+		commandLine.printMessageMachinePlayerThinking(player.getPlayerOrder());
+		return -1;
 	}
 	
-	public void startGame() throws IOException{
-		showWelcomeMessage();
-		createBoard();
-		createPlayersBasedOnChosenTypes();
-		announcePlayersTokensAtStart();
-		createGameReferee();
-		showSquaresLabelsOnBoard();
-	}
-	
-	public void announceWinner(Player player) {
-		String winnerType; 
-		if (player.isMachine()) {
-			winnerType = "machine";
-		} else {
-			winnerType = "human";
+	public int getMoveFromHumanPlayer(Player player) throws NumberFormatException, IOException{
+		int position;
+		commandLine.askHumanPlayerForMove(player.getPlayerOrder());
+		position = commandLine.getBoardPositionFromHumanPlayer();
+		while(!board.isSquareEmpty(position)) {
+			commandLine.askHumanPlayerForMoveAgain();
+			position = commandLine.getBoardPositionFromHumanPlayer();
 		}
-		commandLine.printResultOfGame(winnerType, player.getPlayerOrder());
+		return position;
 	}
 	
 	public void endGame() {
@@ -134,15 +131,17 @@ public class Game {
 				announceWinner(player2);
 			}
 		} else {
-			commandLine.announceItWasATie();
+			commandLine.printMessageItWasATie();
 		}
 	}
 	
-	public void playGame() throws IOException{
-		startGame();
-		while(!gameReferee.isGameOver(board)) {
-			askPlayersForMoves();
+	public void announceWinner(Player player) {
+		String winnerType; 
+		if (player.isMachine()) {
+			winnerType = "machine";
+		} else {
+			winnerType = "human";
 		}
-		endGame();
+		commandLine.printResultOfGame(winnerType, player.getPlayerOrder());
 	}
 }
