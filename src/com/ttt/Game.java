@@ -124,10 +124,10 @@ public class Game {
 		String winner;
 		if (!gameReferee.isTie(board)) {
 			winner = gameReferee.whoIsWinner(board);
-			if(player1.getToken() == winner) {
+			if(player1.getToken().equals(winner)) {
 				announceWinner(player1);
 			}
-			if(player2.getToken() == winner) {
+			if(player2.getToken().equals(winner)) {
 				announceWinner(player2);
 			}
 		} else {

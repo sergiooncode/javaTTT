@@ -4,23 +4,15 @@ import static org.junit.Assert.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 import java.io.IOException;
 
-import org.junit.Before;
 import org.junit.Test;
 
 public class CommandLineTest {
 	final String newLine = System.getProperty("line.separator");
 	CommandLine commandLine;
 	Scanner scanner;
-
-	@Before
-	public void setUp() throws Exception {
-		
-	}
 
 	@Test
 	public void testWelcomeMessage() {
@@ -102,6 +94,32 @@ public class CommandLineTest {
 		PrintStream out = new PrintStream(outputBuffer);
 		commandLine = new CommandLine(scanner, out);
 		assertEquals("m", commandLine.getPlayerType(1));
+	}
+	
+	@Test
+	public void testGetPlayerTypeAndIsValidButUppercase() throws IOException{
+		scanner = new Scanner("M ");
+		scanner.useDelimiter(" ");
+		
+		ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
+		PrintStream out = new PrintStream(outputBuffer);
+		commandLine = new CommandLine(scanner, out);
+		assertEquals("m", commandLine.getPlayerType(1));
+	}
+	
+	@Test
+	public void testGetPlayerTypeAndIsInvalidAndUppercase() throws IOException{
+		scanner = new Scanner("J H ");
+		scanner.useDelimiter(" ");
+		
+		ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
+		PrintStream out = new PrintStream(outputBuffer);
+		
+		commandLine = new CommandLine(scanner, out);
+		commandLine.getPlayerType(1);
+		final String output = outputBuffer.toString();
+		assertTrue(output.startsWith("Type h or m to choose the type of player 1 who will move in first place: (h)uman or (m)achine"));
+		assertTrue(output.contains("Please enter a valid type:"));
 	}
 
 
@@ -338,5 +356,17 @@ public class CommandLineTest {
 		
 		commandLine = new CommandLine(scanner, out);
 		assertTrue(commandLine.isBoardPositionInvalid("10"));
+	}
+	
+	@Test
+	public void testBoardPositionEnteredIsValid() {
+		scanner = new Scanner("");
+		scanner.useDelimiter(" ");
+		
+		ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
+		PrintStream out = new PrintStream(outputBuffer);
+		
+		commandLine = new CommandLine(scanner, out);
+		assertFalse(commandLine.isBoardPositionInvalid("1"));
 	}
 }

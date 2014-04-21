@@ -11,8 +11,8 @@ public class CommandLine{
 	private Scanner input;
 	
 	public CommandLine(Scanner scanner, PrintStream out) {
-		this.output = out;
-		this.input = scanner;
+		output = out;
+		input = scanner;
 	}
 	
 	public void printWelcomeMessage() {
@@ -28,10 +28,10 @@ public class CommandLine{
 	public String getPlayerType(int playerOrderWhenChoosingType) throws IOException{
 		String inputForPlayerType;
 		askForPlayerType(playerOrderWhenChoosingType);
-		inputForPlayerType = input.next();
+		inputForPlayerType = input.next().toLowerCase();
 		while(isTypeEnteredInvalid(inputForPlayerType)) {
 			output.println("Please enter a valid type:");
-			inputForPlayerType = input.next();
+			inputForPlayerType = input.next().toLowerCase();
 		}
 		return inputForPlayerType;
 	}
@@ -58,7 +58,7 @@ public class CommandLine{
 		for(int i=0; i < 3; i++) { 
 			output.print("  |  ");
 			for (int k=0; k < 3; k++) {
-				if(squares[k + 3*i] == "-") {
+				if(squares[k + 3*i].equals("-")) {
 					output.print(String.valueOf(k + 3*i + 1) + "  |  ");
 				} else {
 					output.print(squares[k + 3*i] + "  |  ");

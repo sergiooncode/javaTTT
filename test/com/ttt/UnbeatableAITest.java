@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,10 +20,6 @@ public class UnbeatableAITest {
 		board = new Board(rows, columns);
 		unbeatableAI = new UnbeatableAI(board, "X");
 		currentPlayer = "X";
-	}
-
-	@After
-	public void tearDown() throws Exception {
 	}
 
 	@Test

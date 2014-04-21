@@ -25,7 +25,7 @@ public class UnbeatableAI{
 	public ArrayList<Integer> getPlayableMoves(Board nextBoard) {
 		ArrayList<Integer> playableMoves = new ArrayList<Integer>();
 		for(int k=0; k < nextBoard.getBoardSize(); k++) {
-			if(nextBoard.getGivenSquare(k + 1) == "-") {
+			if(nextBoard.isSquareEmpty(k + 1)) {
 				playableMoves.add(k);
 			}
 		}
@@ -36,10 +36,10 @@ public class UnbeatableAI{
 		String winner = gameReferee.whoIsWinner(nextBoard);
 		int score = -1;
 		if(!gameReferee.isTie(nextBoard)) {
-			if(winner == currentPlayer) {
+			if(winner.equals(currentPlayer)) {
 				score = INFINITY;
 			}
-			if(winner != currentPlayer) {
+			if(!winner.equals(currentPlayer)) {
 				score = -INFINITY;
 			} 
 		} else {
@@ -50,7 +50,7 @@ public class UnbeatableAI{
 	
 	public String alternatePlayer(String currentPlayer) {
 		String otherPlayer;
-		if(currentPlayer == "X") {
+		if(currentPlayer.equals("X")) {
 			otherPlayer = "O";
 		} else {
 			otherPlayer = "X";

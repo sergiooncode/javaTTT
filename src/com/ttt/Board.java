@@ -1,11 +1,14 @@
 package com.ttt;
 
 public class Board {
-	private final int boardSize;
+	private int boardSize;
 	private String[] squares;
+	private int rows, columns;
 	
 	public Board(int rows , int columns) {
-		this.boardSize = rows*columns;
+		this.rows = rows;
+		this.columns = columns;
+		boardSize = this.rows*this.columns;
 		squares = new String[boardSize];
 		initSquares(); 
 	}	
@@ -29,7 +32,7 @@ public class Board {
 	}
 	
 	public boolean isSquareEmpty(int position) {
-		if (squares[position - 1] == "-") {
+		if (squares[position - 1].equals("-")) {
 			return true;
 		}
 		return false;
@@ -42,7 +45,7 @@ public class Board {
 	public boolean isFilled() {
 		boolean filled = true;
 		for(int k=0; k < squares.length; k++) {
-			if(squares[k] == "-") {
+			if(squares[k].equals("-")) {
 				filled = false;
 			}
 		}

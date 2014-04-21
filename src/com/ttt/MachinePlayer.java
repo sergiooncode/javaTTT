@@ -14,14 +14,6 @@ public class MachinePlayer implements Player {
 		return playerOrder;
 	}
 	
-	public void simulateThinking(int numberOfMilliseconds){
-		try {
-			Thread.sleep(1000);
-		} catch(InterruptedException ex) {
-			Thread.currentThread().interrupt();
-		}
-	}
-
 	@Override
 	public String getToken() {
 		// TODO Auto-generated method stub
@@ -38,7 +30,6 @@ public class MachinePlayer implements Player {
 	public Board getNextMove(Board board, int position) {
 		// TODO Auto-generated method stub
 		unbeatableAi = new UnbeatableAI(board, token);
-		simulateThinking(1000);
 		board.setGivenSquare(unbeatableAi.generateMove(),getToken());
 		return board;
 	}
