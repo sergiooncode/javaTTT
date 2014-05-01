@@ -55,32 +55,4 @@ public class BoardTest {
 	public void testGetBoardSize() {
 		assertEquals(9, board.getBoardSize());
 	}
-
-	@Test
-	public void testFilledIsTrue() {
-		board.setGivenSquare(1, "X");
-		board.setGivenSquare(2, "O");
-		board.setGivenSquare(3, "O");
-		board.setGivenSquare(4, "O");
-		board.setGivenSquare(5, "X");
-		board.setGivenSquare(6, "O");
-		board.setGivenSquare(7, "O");
-		board.setGivenSquare(8, "X");
-		board.setGivenSquare(9, "X");
-		assertTrue(board.isFilled());
-	}
-	
-	@Test
-	public void testFilledIsFalse() {
-		board.setGivenSquare(1, "X");
-		board.setGivenSquare(2, "O");
-		board.setGivenSquare(3, "O");
-		board.setGivenSquare(4, "O");
-		board.setGivenSquare(5, "-");
-		board.setGivenSquare(6, "O");
-		board.setGivenSquare(7, "O");
-		board.setGivenSquare(8, "X");
-		board.setGivenSquare(9, "X");
-		assertFalse(board.isFilled());
-	}
 }
