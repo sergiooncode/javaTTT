@@ -39,7 +39,13 @@ public class GameReferee {
 	}
 	
 	public boolean isBoardFilled(Board board) {
-		return board.isFilled();
+		boolean filled = true;
+		for(int k = 0; k < board.getBoardSize(); k++) {
+			if(board.isSquareEmpty(k + 1)) {
+				filled = false;
+			}
+		}
+		return filled;
 	}
 	
 	public boolean isGameOver(Board board) {

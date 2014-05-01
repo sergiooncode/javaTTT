@@ -42,16 +42,6 @@ public class Board {
 		return boardSize;
 	} 
 	
-	public boolean isFilled() {
-		boolean filled = true;
-		for(int k=0; k < squares.length; k++) {
-			if(squares[k].equals("-")) {
-				filled = false;
-			}
-		}
-		return filled;
-	}
-	
 	public String getGivenSquare(int position) {
 		return squares[position - 1];
 	}
