@@ -5,12 +5,16 @@ public class MachinePlayer implements Player {
 	private int playerOrder;
 	private ArtificialIntelligence artificialIntelligence;
 	
-	public MachinePlayer(String token, int playerOrder) {
+	public MachinePlayer(String token) {
 		this.token = token;
-		this.playerOrder = playerOrder;
 	}
 	
 	public int getPlayerOrder() {
+		if(token.equals("X")){
+			playerOrder = 1;
+		} else{
+			playerOrder = 2;
+		}
 		return playerOrder;
 	}
 	

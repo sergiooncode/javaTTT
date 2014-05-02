@@ -4,12 +4,16 @@ public class HumanPlayer implements Player {
 	private String token;
 	private int playerOrder;
 	
-	public HumanPlayer(String token, int playerOrder) {
+	public HumanPlayer(String token) {
 		this.token = token;
-		this.playerOrder = playerOrder;
 	}
 	
 	public int getPlayerOrder() {
+		if(token.equals("X")){
+			playerOrder = 1;
+		} else{
+			playerOrder = 2;
+		}
 		return playerOrder;
 	}
 	

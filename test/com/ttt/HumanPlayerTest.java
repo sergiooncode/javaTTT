@@ -14,8 +14,7 @@ public class HumanPlayerTest {
 	@Before
 	public void setUp() throws Exception {
 		token = "X";
-		playerOrder = 1;
-		humanPlayer = new HumanPlayer(token, playerOrder);
+		humanPlayer = new HumanPlayer(token);
 	}
 	
 	@Test

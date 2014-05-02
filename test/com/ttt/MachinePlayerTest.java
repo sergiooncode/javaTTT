@@ -14,8 +14,7 @@ public class MachinePlayerTest {
 	@Before
 	public void setUp() throws Exception {
 		token = "O";
-		playerOrder = 2;
-		machinePlayer = new MachinePlayer(token, playerOrder);
+		machinePlayer = new MachinePlayer(token);
 	}
 	
 	@Test
