@@ -26,7 +26,7 @@ public class Game {
 	public void startGame() throws IOException{
 		showWelcomeMessage();
 		createBoard();
-		createPlayersBasedOnChosenTypes();
+		askSettings();
 		announcePlayersTokensAtStart();
 		createGameReferee();
 		showSquaresLabelsOnBoard();
@@ -40,25 +40,29 @@ public class Game {
 		board = new Board(rows, columns);
 	}
 	
-	public void createPlayersBasedOnChosenTypes() throws IOException{
-		String[] playersTypes = askForTypesOfPlayers();
-		if(playersTypes[0].equals("m")) {
-			player1 = new MachinePlayer("X", 1);
+	public Player createPlayer(String input, String token) throws IOException{
+		Player player;
+		if(input.equals("m")) {
+			player = new MachinePlayer(token, 1);
 		} else {
-			player1 = new HumanPlayer("X", 1);
+			player = new HumanPlayer("X", 1);
 		}
-		if(playersTypes[1].equals("m")) {
-			player2 = new MachinePlayer("O", 2);
-		} else {
-			player2 = new HumanPlayer("O", 2);
-		}
+		return player;
 	}
 	
-	public String[] askForTypesOfPlayers() throws IOException{
-		String[] playersTypes = new String[2];
-		playersTypes[0] = commandLine.getPlayerType(1);
-		playersTypes[1] = commandLine.getPlayerType(2);
-		return playersTypes;
+	public void askFirstPlayerForType() throws IOException{
+		String first = commandLine.getPlayerType(1);
+		player1 = createPlayer(first, "X");
+	}
+	
+	public void askSecondPlayerForType() throws IOException{
+		String second = commandLine.getPlayerType(2);
+		player2 = createPlayer(second, "O");
+	}
+	
+	public void askSettings() throws IOException{
+		askFirstPlayerForType();
+		askSecondPlayerForType();
 	}
 	
 	public void announcePlayersTokensAtStart() {
