@@ -2,7 +2,7 @@ package com.ttt;
 
 import java.util.ArrayList;
 
-public class UnbeatableAI{
+public class UnbeatableAI implements ArtificialIntelligence{
 	private static final int INFINITY = 1000000;
 	private Board board;
 	private GameReferee gameReferee = new GameReferee();
@@ -89,6 +89,7 @@ public class UnbeatableAI{
 		return negamaxRecursedResult;
 	}
 	
+	@Override
 	public int generateMove() {
 		int[] negamaxResult = new int[2];
 		int maxTreeDepth = board.getBoardSize();

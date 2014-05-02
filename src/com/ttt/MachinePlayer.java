@@ -3,7 +3,7 @@ package com.ttt;
 public class MachinePlayer implements Player {
 	private String token;
 	private int playerOrder;
-	private UnbeatableAI unbeatableAi;
+	private ArtificialIntelligence artificialIntelligence;
 	
 	public MachinePlayer(String token, int playerOrder) {
 		this.token = token;
@@ -29,8 +29,8 @@ public class MachinePlayer implements Player {
 	@Override
 	public Board getNextMove(Board board, int position) {
 		// TODO Auto-generated method stub
-		unbeatableAi = new UnbeatableAI(board, token);
-		board.setGivenSquare(unbeatableAi.generateMove(),getToken());
+		artificialIntelligence = new UnbeatableAI(board, token);
+		board.setGivenSquare(artificialIntelligence.generateMove(),getToken());
 		return board;
 	}
 
