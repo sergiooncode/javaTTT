@@ -40,24 +40,24 @@ public class Game {
 		board = new Board(rows, columns);
 	}
 	
-	public Player createPlayer(String input, String token) throws IOException{
+	public Player createPlayer(String input, String token, int order) throws IOException{
 		Player player;
 		if(input.equals("m")) {
-			player = new MachinePlayer(token, 1);
+			player = new MachinePlayer(token, order);
 		} else {
-			player = new HumanPlayer("X", 1);
+			player = new HumanPlayer(token, order);
 		}
 		return player;
 	}
 	
 	public void askFirstPlayerForType() throws IOException{
 		String first = commandLine.getPlayerType(1);
-		player1 = createPlayer(first, "X");
+		player1 = createPlayer(first, "X", 1);
 	}
 	
 	public void askSecondPlayerForType() throws IOException{
 		String second = commandLine.getPlayerType(2);
-		player2 = createPlayer(second, "O");
+		player2 = createPlayer(second, "O", 2);
 	}
 	
 	public void askSettings() throws IOException{
