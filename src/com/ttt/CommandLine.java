@@ -22,6 +22,7 @@ public class CommandLine implements UserInterface{
 		output.println();
 	}
 	
+	@Override
 	public void askForPlayerType (int playerOrder) {
 		output.println(String.format("Type h or m to choose the type of player %s who will move in %s place: (h)uman or (m)achine", playerOrder, playerOrder == 1 ? "first" : "second"));
 	}
@@ -38,16 +39,19 @@ public class CommandLine implements UserInterface{
 		return inputForPlayerType;
 	}
 	
+	@Override
 	public void printMachinePlayerToken(int playerOrder, String token) {
 		output.println(String.format("Machine player %s plays with token %s", playerOrder, token));
 		output.println();
 	}
 	
+	@Override
 	public void printHumanPlayerToken(int playerOrder, String token) {
 		output.println(String.format("Human player %s plays with token %s", playerOrder, token));
 		output.println();
 	}
 	
+	@Override
 	public void printMessageBeforeShowingBoardLabeling() {
 		output.println("The moves must be entered according to the following labels:");
 		output.println();
@@ -74,18 +78,22 @@ public class CommandLine implements UserInterface{
 		output.println();
 	}
 	
+	@Override
 	public void askHumanPlayerForMove(int playerOrder) {
 		output.println(String.format("Please human player %s type the next move:", playerOrder));
 	}
 	
+	@Override
 	public void askHumanPlayerForMoveAgain() {
 		output.println("Please enter a valid move:");
 	}
 	
+	@Override
 	public void askHumanPlayerForValidBoardPosition() {
 		output.println("Please enter a valid board position:");
 	}
 	
+	@Override
 	public void printMessageMachinePlayerThinking(int playerOrder) {
 		output.println(String.format("Machine player %s is thinking its next move...", playerOrder));
 	}
@@ -105,6 +113,7 @@ public class CommandLine implements UserInterface{
 		output.println(String.format("The %s player %s won.", winnerType, playerOrder));
 	}
 	
+	@Override
 	public void printMessageItWasATie(){
 		output.println("It was a tie. Well played.");
 	}
