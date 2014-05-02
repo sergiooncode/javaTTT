@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.io.IOException;
 import java.io.PrintStream;
 
-public class CommandLine{
+public class CommandLine implements UserInterface{
 	private PrintStream output;
 	private Scanner input;
 	
@@ -15,6 +15,7 @@ public class CommandLine{
 		input = scanner;
 	}
 	
+	@Override
 	public void printWelcomeMessage() {
 		output.println();
 		output.println("               ------------------Welcome to Tic Tac Toe game------------------               ");
@@ -25,6 +26,7 @@ public class CommandLine{
 		output.println(String.format("Type h or m to choose the type of player %s who will move in %s place: (h)uman or (m)achine", playerOrder, playerOrder == 1 ? "first" : "second"));
 	}
 	
+	@Override
 	public String getPlayerType(int playerOrderWhenChoosingType) throws IOException{
 		String inputForPlayerType;
 		askForPlayerType(playerOrderWhenChoosingType);
@@ -51,6 +53,7 @@ public class CommandLine{
 		output.println();
 	}
 	
+	@Override
 	public void printSquares(Board board) {
 		String[] squares = board.getSquares();
 		output.println("    __    __    __  ");
@@ -87,6 +90,7 @@ public class CommandLine{
 		output.println(String.format("Machine player %s is thinking its next move...", playerOrder));
 	}
 	
+	@Override
 	public int getBoardPositionFromHumanPlayer() throws NumberFormatException, IOException{
 		String positionTyped = input.next();
 		while(isBoardPositionInvalid(positionTyped)) {
@@ -96,6 +100,7 @@ public class CommandLine{
 		return Integer.parseInt(positionTyped);
 	}
 	
+	@Override
 	public void printResultOfGame(String winnerType, int playerOrder) {
 		output.println(String.format("The %s player %s won.", winnerType, playerOrder));
 	}
