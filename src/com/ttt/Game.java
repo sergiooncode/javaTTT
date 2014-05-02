@@ -3,7 +3,7 @@ package com.ttt;
 import java.io.IOException;
 
 public class Game {
-	private CommandLine commandLine;
+	private UserInterface userInterface;
 	private Player player1;
 	private Player player2;
 	private Board board;
@@ -11,8 +11,8 @@ public class Game {
 	private static final int columns = 3;
 	private GameReferee gameReferee;
 	
-	public Game(CommandLine commandline) {
-		this.commandLine = commandline;
+	public Game(UserInterface userInterface) {
+		this.userInterface = userInterface;
 	}
 	
 	public void playGame() throws IOException{
@@ -33,7 +33,7 @@ public class Game {
 	}
 	
 	public void showWelcomeMessage() {
-		commandLine.printWelcomeMessage();
+		userInterface.printWelcomeMessage();
 	}
 	
 	public void createBoard() {
@@ -51,12 +51,12 @@ public class Game {
 	}
 	
 	public void askFirstPlayerForType() throws IOException{
-		String first = commandLine.getPlayerType(1);
+		String first = userInterface.getPlayerType(1);
 		player1 = createPlayer(first, "X", 1);
 	}
 	
 	public void askSecondPlayerForType() throws IOException{
-		String second = commandLine.getPlayerType(2);
+		String second = userInterface.getPlayerType(2);
 		player2 = createPlayer(second, "O", 2);
 	}
 	
@@ -72,9 +72,9 @@ public class Game {
 	
 	public void announcePlayerToken(Player player) {
 		if(player.isMachine()) {
-			commandLine.printMachinePlayerToken(player.getPlayerOrder(), player.getToken());
+			userInterface.printMachinePlayerToken(player.getPlayerOrder(), player.getToken());
 		} else {
-			commandLine.printHumanPlayerToken(player.getPlayerOrder(), player.getToken());
+			userInterface.printHumanPlayerToken(player.getPlayerOrder(), player.getToken());
 		}
 	}
 	
@@ -83,8 +83,8 @@ public class Game {
 	}
 	
 	public void showSquaresLabelsOnBoard() {
-		commandLine.printMessageBeforeShowingBoardLabeling();
-		commandLine.printSquares(board);
+		userInterface.printMessageBeforeShowingBoardLabeling();
+		userInterface.printSquares(board);
 	}
 	
 	public void askPlayersForMoves() throws IOException{
@@ -100,26 +100,26 @@ public class Game {
 		if (player.isMachine()) {
 			position = getMoveFromMachinePlayer(player);
 			board = player.getNextMove(board, position);
-			commandLine.printSquares(board);
+			userInterface.printSquares(board);
 		} else {
 			position = getMoveFromHumanPlayer(player);
 			board = player.getNextMove(board, position);
-			commandLine.printSquares(board);
+			userInterface.printSquares(board);
 		}
 	}
 	
 	public int getMoveFromMachinePlayer(Player player) throws IOException{
-		commandLine.printMessageMachinePlayerThinking(player.getPlayerOrder());
+		userInterface.printMessageMachinePlayerThinking(player.getPlayerOrder());
 		return -1;
 	}
 	
 	public int getMoveFromHumanPlayer(Player player) throws NumberFormatException, IOException{
 		int position;
-		commandLine.askHumanPlayerForMove(player.getPlayerOrder());
-		position = commandLine.getBoardPositionFromHumanPlayer();
+		userInterface.askHumanPlayerForMove(player.getPlayerOrder());
+		position = userInterface.getBoardPositionFromHumanPlayer();
 		while(!board.isSquareEmpty(position)) {
-			commandLine.askHumanPlayerForMoveAgain();
-			position = commandLine.getBoardPositionFromHumanPlayer();
+			userInterface.askHumanPlayerForMoveAgain();
+			position = userInterface.getBoardPositionFromHumanPlayer();
 		}
 		return position;
 	}
@@ -135,7 +135,7 @@ public class Game {
 				announceWinner(player2);
 			}
 		} else {
-			commandLine.printMessageItWasATie();
+			userInterface.printMessageItWasATie();
 		}
 	}
 	
@@ -146,6 +146,6 @@ public class Game {
 		} else {
 			winnerType = "human";
 		}
-		commandLine.printResultOfGame(winnerType, player.getPlayerOrder());
+		userInterface.printResultOfGame(winnerType, player.getPlayerOrder());
 	}
 }
