@@ -11,6 +11,7 @@ import org.junit.Test;
 
 public class CommandLineTest {
 	final String newLine = System.getProperty("line.separator");
+	UserInterface userInterface;
 	CommandLine commandLine;
 	Scanner scanner;
 
@@ -22,8 +23,8 @@ public class CommandLineTest {
 		ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
 		PrintStream out = new PrintStream(outputBuffer);
 		
-		commandLine = new CommandLine(scanner, out);
-		commandLine.printWelcomeMessage();
+		userInterface = new CommandLine(scanner, out);
+		userInterface.printWelcomeMessage();
 		final String output = outputBuffer.toString();
 		assertTrue(output.startsWith(newLine));
 		assertTrue(output.contains("               ------------------Welcome to Tic Tac Toe game------------------               "));
@@ -38,8 +39,8 @@ public class CommandLineTest {
 		ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
 		PrintStream out = new PrintStream(outputBuffer);
 		
-		commandLine = new CommandLine(scanner, out);
-		commandLine.printMachinePlayerToken(1, "X");
+		userInterface = new CommandLine(scanner, out);
+		userInterface.printMachinePlayerToken(1, "X");
 		final String output = outputBuffer.toString();
 		assertTrue(output.startsWith("Machine player 1 plays with token X"));
 		assertTrue(output.contains(newLine));
@@ -53,8 +54,8 @@ public class CommandLineTest {
 		ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
 		PrintStream out = new PrintStream(outputBuffer);
 		
-		commandLine = new CommandLine(scanner, out);
-		commandLine.askForPlayerType(1);
+		userInterface = new CommandLine(scanner, out);
+		userInterface.askForPlayerType(1);
 		final String output = outputBuffer.toString();
 		assertTrue(output.startsWith("Type h or m to choose the type of player 1 who will move in first place: (h)uman or (m)achine"));
 	}
@@ -67,8 +68,8 @@ public class CommandLineTest {
 		ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
 		PrintStream out = new PrintStream(outputBuffer);
 		
-		commandLine = new CommandLine(scanner, out);
-		commandLine.getPlayerType(1);
+		userInterface = new CommandLine(scanner, out);
+		userInterface.getPlayerType(1);
 		final String output = outputBuffer.toString();
 		assertTrue(output.startsWith("Type h or m to choose the type of player 1 who will move in first place: (h)uman or (m)achine"));
 		assertTrue(output.contains("Please enter a valid type:"));
@@ -81,8 +82,8 @@ public class CommandLineTest {
 		
 		ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
 		PrintStream out = new PrintStream(outputBuffer);
-		commandLine = new CommandLine(scanner, out);
-		assertEquals("h", commandLine.getPlayerType(1));
+		userInterface = new CommandLine(scanner, out);
+		assertEquals("h", userInterface.getPlayerType(1));
 	}
 	
 	@Test
@@ -92,8 +93,8 @@ public class CommandLineTest {
 		
 		ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
 		PrintStream out = new PrintStream(outputBuffer);
-		commandLine = new CommandLine(scanner, out);
-		assertEquals("m", commandLine.getPlayerType(1));
+		userInterface = new CommandLine(scanner, out);
+		assertEquals("m", userInterface.getPlayerType(1));
 	}
 	
 	@Test
@@ -103,8 +104,8 @@ public class CommandLineTest {
 		
 		ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
 		PrintStream out = new PrintStream(outputBuffer);
-		commandLine = new CommandLine(scanner, out);
-		assertEquals("m", commandLine.getPlayerType(1));
+		userInterface = new CommandLine(scanner, out);
+		assertEquals("m", userInterface.getPlayerType(1));
 	}
 	
 	@Test
@@ -115,8 +116,8 @@ public class CommandLineTest {
 		ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
 		PrintStream out = new PrintStream(outputBuffer);
 		
-		commandLine = new CommandLine(scanner, out);
-		commandLine.getPlayerType(1);
+		userInterface = new CommandLine(scanner, out);
+		userInterface.getPlayerType(1);
 		final String output = outputBuffer.toString();
 		assertTrue(output.startsWith("Type h or m to choose the type of player 1 who will move in first place: (h)uman or (m)achine"));
 		assertTrue(output.contains("Please enter a valid type:"));
@@ -131,8 +132,8 @@ public class CommandLineTest {
 		ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
 		PrintStream out = new PrintStream(outputBuffer);
 		
-		commandLine = new CommandLine(scanner, out);
-		commandLine.printHumanPlayerToken(1, "X");
+		userInterface = new CommandLine(scanner, out);
+		userInterface.printHumanPlayerToken(1, "X");
 		final String output = outputBuffer.toString();
 		assertTrue(output.startsWith("Human player 1 plays with token X"));
 		assertTrue(output.contains(newLine));
@@ -146,8 +147,8 @@ public class CommandLineTest {
 		ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
 		PrintStream out = new PrintStream(outputBuffer);
 		
-		commandLine = new CommandLine(scanner, out);
-		commandLine.printMachinePlayerToken(1, "X");
+		userInterface = new CommandLine(scanner, out);
+		userInterface.printMachinePlayerToken(1, "X");
 		final String output = outputBuffer.toString();
 		assertTrue(output.startsWith("Machine player 1 plays with token X"));
 		assertTrue(output.contains(newLine));
@@ -161,8 +162,8 @@ public class CommandLineTest {
 		ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
 		PrintStream out = new PrintStream(outputBuffer);
 		
-		commandLine = new CommandLine(scanner, out);
-		commandLine.printMessageBeforeShowingBoardLabeling();
+		userInterface = new CommandLine(scanner, out);
+		userInterface.printMessageBeforeShowingBoardLabeling();
 		final String output = outputBuffer.toString();
 		assertTrue(output.startsWith("The moves must be entered according to the following labels:"));
 		assertTrue(output.contains(newLine));
@@ -178,8 +179,8 @@ public class CommandLineTest {
 		
 		String[] squares = {"O", "X", "O", "-", "X", "X", "-", "X", "O"};
 		Board board = new Board(squares);
-		commandLine = new CommandLine(scanner, out);
-		commandLine.printSquares(board);
+		userInterface = new CommandLine(scanner, out);
+		userInterface.printSquares(board);
 		final String output = outputBuffer.toString();
 		assertTrue(output.startsWith("    __    __    __  "));
 		assertTrue(output.contains(newLine));
@@ -206,8 +207,8 @@ public class CommandLineTest {
 		ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
 		PrintStream out = new PrintStream(outputBuffer);
 		
-		commandLine = new CommandLine(scanner, out);
-		commandLine.askHumanPlayerForMove(1);
+		userInterface = new CommandLine(scanner, out);
+		userInterface.askHumanPlayerForMove(1);
 		final String output = outputBuffer.toString();
 		assertTrue(output.startsWith("Please human player 1 type the next move:"));
 	}
@@ -220,8 +221,8 @@ public class CommandLineTest {
 		ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
 		PrintStream out = new PrintStream(outputBuffer);
 		
-		commandLine = new CommandLine(scanner, out);
-		commandLine.askHumanPlayerForMoveAgain();
+		userInterface = new CommandLine(scanner, out);
+		userInterface.askHumanPlayerForMoveAgain();
 		final String output = outputBuffer.toString();
 		assertTrue(output.startsWith("Please enter a valid move:"));
 	}
@@ -234,8 +235,8 @@ public class CommandLineTest {
 		ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
 		PrintStream out = new PrintStream(outputBuffer);
 		
-		commandLine = new CommandLine(scanner, out);
-		commandLine.printMessageMachinePlayerThinking(1);
+		userInterface = new CommandLine(scanner, out);
+		userInterface.printMessageMachinePlayerThinking(1);
 		final String output = outputBuffer.toString();
 		assertTrue(output.startsWith("Machine player 1 is thinking its next move..."));
 		assertTrue(output.contains(newLine));
@@ -249,8 +250,8 @@ public class CommandLineTest {
 		ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
 		PrintStream out = new PrintStream(outputBuffer);
 		
-		commandLine = new CommandLine(scanner, out);
-		assertEquals(1, commandLine.getBoardPositionFromHumanPlayer());
+		userInterface = new CommandLine(scanner, out);
+		assertEquals(1, userInterface.getBoardPositionFromHumanPlayer());
 	}
 	
 	@Test
@@ -261,8 +262,8 @@ public class CommandLineTest {
 		ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
 		PrintStream out = new PrintStream(outputBuffer);
 		
-		commandLine = new CommandLine(scanner, out);
-		commandLine.getBoardPositionFromHumanPlayer();
+		userInterface = new CommandLine(scanner, out);
+		userInterface.getBoardPositionFromHumanPlayer();
 		final String output = outputBuffer.toString();
 		assertTrue(output.startsWith("Please enter a valid board position:"));
 		assertTrue(output.contains(newLine));
@@ -276,8 +277,8 @@ public class CommandLineTest {
 		ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
 		PrintStream out = new PrintStream(outputBuffer);
 		
-		commandLine = new CommandLine(scanner, out);
-		assertEquals(1, commandLine.getBoardPositionFromHumanPlayer());
+		userInterface = new CommandLine(scanner, out);
+		assertEquals(1, userInterface.getBoardPositionFromHumanPlayer());
 	}
 	
 	@Test
@@ -288,8 +289,8 @@ public class CommandLineTest {
 		ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
 		PrintStream out = new PrintStream(outputBuffer);
 		
-		commandLine = new CommandLine(scanner, out);
-		commandLine.printResultOfGame("machine", 1);
+		userInterface = new CommandLine(scanner, out);
+		userInterface.printResultOfGame("machine", 1);
 		final String output = outputBuffer.toString(); 
 		assertTrue(output.startsWith("The machine player 1 won."));
 	}
@@ -302,8 +303,8 @@ public class CommandLineTest {
 		ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
 		PrintStream out = new PrintStream(outputBuffer);
 		
-		commandLine = new CommandLine(scanner, out);
-		commandLine.printResultOfGame("human", 1);
+		userInterface = new CommandLine(scanner, out);
+		userInterface.printResultOfGame("human", 1);
 		final String output = outputBuffer.toString(); 
 		assertTrue(output.startsWith("The human player 1 won."));
 	}
@@ -316,8 +317,8 @@ public class CommandLineTest {
 		ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
 		PrintStream out = new PrintStream(outputBuffer);
 		
-		commandLine = new CommandLine(scanner, out);
-		commandLine.printMessageItWasATie();
+		userInterface = new CommandLine(scanner, out);
+		userInterface.printMessageItWasATie();
 		final String output = outputBuffer.toString();
 		assertTrue(output.startsWith("It was a tie. Well played."));
 	}
