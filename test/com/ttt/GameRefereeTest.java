@@ -6,17 +6,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class GameRefereeTest {
-	Board board;
-	int rows = 3;
-	int columns = 3;
-	int boardSize;
-	GameReferee gameReferee;
-	String[] squares;
+	private Board board;
+	private int rows = 3;
+	private int columns = 3;
+	private GameReferee gameReferee;
+	private String[] squares;
 
 	@Before
 	public void setUp() throws Exception {
 		board = new Board(rows, columns);
-		boardSize = board.getBoardSize();
 		gameReferee = new GameReferee();
 	}
 

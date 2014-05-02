@@ -11,9 +11,9 @@ import org.junit.Test;
 
 public class CommandLineTest {
 	final String newLine = System.getProperty("line.separator");
-	UserInterface userInterface;
-	CommandLine commandLine;
-	Scanner scanner;
+	private UserInterface userInterface;
+	private CommandLine commandLine;
+	private Scanner scanner;
 
 	@Test
 	public void testWelcomeMessage() {

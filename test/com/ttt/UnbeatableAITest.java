@@ -9,11 +9,11 @@ import org.junit.Test;
 
 public class UnbeatableAITest {
 	static final int INFINITY = 1000000;
-	Board board;
-	UnbeatableAI unbeatableAI;
-	String currentPlayer;
-	int rows = 3;
-	int columns = 3;
+	private Board board;
+	private UnbeatableAI unbeatableAI;
+	private String currentPlayer;
+	private int rows = 3;
+	private int columns = 3;
 	
 	@Before
 	public void setUp() throws Exception {

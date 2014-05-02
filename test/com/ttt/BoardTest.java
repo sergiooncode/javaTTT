@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class BoardTest {
-	Board board;
+	private Board board;
 
 	@Before
 	public void setUp() throws Exception {
