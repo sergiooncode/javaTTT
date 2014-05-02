@@ -22,7 +22,6 @@ public class CommandLine implements UserInterface{
 		output.println();
 	}
 	
-	@Override
 	public void askForPlayerType (int playerOrder) {
 		output.println(String.format("Type h or m to choose the type of player %s who will move in %s place: (h)uman or (m)achine", playerOrder, playerOrder == 1 ? "first" : "second"));
 	}
@@ -88,7 +87,6 @@ public class CommandLine implements UserInterface{
 		output.println("Please enter a valid move:");
 	}
 	
-	@Override
 	public void askHumanPlayerForValidBoardPosition() {
 		output.println("Please enter a valid board position:");
 	}

@@ -54,8 +54,8 @@ public class CommandLineTest {
 		ByteArrayOutputStream outputBuffer = new ByteArrayOutputStream();
 		PrintStream out = new PrintStream(outputBuffer);
 		
-		userInterface = new CommandLine(scanner, out);
-		userInterface.askForPlayerType(1);
+		commandLine = new CommandLine(scanner, out);
+		commandLine.askForPlayerType(1);
 		final String output = outputBuffer.toString();
 		assertTrue(output.startsWith("Type h or m to choose the type of player 1 who will move in first place: (h)uman or (m)achine"));
 	}
