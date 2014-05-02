@@ -6,10 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class HumanPlayerTest {
-	HumanPlayer humanPlayer;
-	String token;
-	CommandLine commandLine;
-	int playerOrder;
+	private HumanPlayer humanPlayer;
+	private String token;
 
 	@Before
 	public void setUp() throws Exception {

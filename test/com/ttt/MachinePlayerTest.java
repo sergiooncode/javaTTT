@@ -7,9 +7,8 @@ import org.junit.Test;
 
 public class MachinePlayerTest {
 
-	MachinePlayer machinePlayer;
-	String token;
-	int playerOrder;
+	private MachinePlayer machinePlayer;
+	private String token;
 
 	@Before
 	public void setUp() throws Exception {
